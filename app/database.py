@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from app.config import get_database_url
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from app.config import config
+from app.config import get_database_url
 from contextlib import contextmanager
 
 db_engine = create_engine(get_database_url(), echo=False)
