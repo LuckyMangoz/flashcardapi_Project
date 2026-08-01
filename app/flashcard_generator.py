@@ -1,5 +1,6 @@
 import re
 import random
+from typing import List, Dict, Optional
 import nltk
 
 # Downloads the NLTK sentence tokenizer just in case
