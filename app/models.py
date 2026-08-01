@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, func
 from app.database import db_base
 
+
 class StudyCard(db_base):
     __tablename__ = 'study_cards'
 

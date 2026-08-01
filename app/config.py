@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-#Settings
+# Settings
 
 DB_USER = os.getenv("DB_USER", "LuckyMango")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
@@ -17,6 +17,7 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 
 MAX_CARDS = int(os.getenv("MAX_CARDS", "20"))
 DEFAULT_CARDS_COUNT = int(os.getenv("DEFAULT_CARDS_COUNT", "5"))
+
 
 def get_database_url():
     """Returns the PostgreSQL connection string"""
