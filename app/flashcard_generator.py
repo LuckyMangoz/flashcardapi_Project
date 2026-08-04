@@ -167,7 +167,6 @@ def generate_cards(text: str, num: int = 5) -> List[Dict]:
 
     return result
 
-
 if __name__ == '__main__':
     sample = (
         "A group of crows is a murder.",
@@ -176,6 +175,6 @@ if __name__ == '__main__':
         "A cloud can weigh more than a million pounds."
     )
 
-for text in sample:
-    for c in generate_cards(text, num=1):
-        print(c)
+    for text in sample:
+        for c in generate_cards(text, num=1):
+            print(c)
