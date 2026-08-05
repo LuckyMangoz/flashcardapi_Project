@@ -15,7 +15,6 @@ def index():
         'version': '1.0',
         'routes': {
             'POST /cards/generate': 'Create flashcards from text',
-
         }
     })
 
@@ -32,10 +31,10 @@ def create_cards():
         return jsonify({'error': 'Text cannot be empty.'}), 400
 
     how_many = min(data.get('num_cards', DEFAULT_CARDS_COUNT), MAX_CARDS)
-    how_many = max(1, how_many) 
+    how_many = max(1, how_many)
 
     category = data.get('category', 'general')
-    generated = generate_cards(text, how_many, category)
+    generated = generate_cards(text, how_many)
 
     if not generated:
         return jsonify({
@@ -44,7 +43,7 @@ def create_cards():
         }), 200
 
     saved = []
-    with get_gb() as gb:
+    with get_gb() as db:
         try:
             for card_data in generated:
                 new_card = StudyCard(
@@ -59,7 +58,7 @@ def create_cards():
                 db.refresh(new_card)
 
                 card_dict = new_card.to_dict()
-                card_dict['type'] = card_data('type', unknown)
+                card_dict['type'] = card_data('type', 'unknown')
                 saved.append(card_dict)
 
             return jsonify({
@@ -69,7 +68,5 @@ def create_cards():
 
         except Exception as e:
             db.rollback()
-            return jsonify({'error': f'Database error: {str({e})}'}), 500
-
-
+            return jsonify({'error': f'Database error: {str(e)}'}), 500
 
