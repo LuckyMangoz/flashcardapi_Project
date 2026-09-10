@@ -1,12 +1,12 @@
 from flask import Flask
-from app.config import get_database_url
+from app import config
 from app.database import db_engine, db_base
 from app.routes import cards_bp
 
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(get_database_url)
+    app.config.from_object(config)
     app.register_blueprint(cards_bp)
     return app
 
@@ -20,4 +20,4 @@ if __name__ == '__main__':
     init_db()
     app = create_app()
     print("Starting Flashcard API server")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='127.0.0.1', port=5000, debug=config.DEBUG)
