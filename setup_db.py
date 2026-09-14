@@ -1,3 +1,5 @@
+import sys
+
 from app.database import db_engine, db_base
 from app.models import StudyCard
 
@@ -12,4 +14,8 @@ def init_db():
         print(f"Error, something went wrong: {e}")
 
 if __name__ == "__main__":
-    init_db()
+    try:
+        init_db()
+    except Exception as e:
+        print(f"Setup failed: {e}")
+        sys.exit(1)

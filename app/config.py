@@ -12,7 +12,6 @@ DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "5432")
 DB_NAME = os.getenv("DB_NAME", "flashcard_project")
 
-ADMIN_KEY = os.getenv("ADMIN_KEY", "dev")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 MAX_CARDS = int(os.getenv("MAX_CARDS", "20"))
