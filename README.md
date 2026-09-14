@@ -2,8 +2,10 @@
 
 **Version V1.0.0 (Core API only, no authentication / AI / frontend)**
 
-A REST API that automatically generates flashcards from any text using pattern-matching and NLTK sentence tokenization
-Built with Flask, SQLAlchemy and PostgreSQL
+A REST API that generates study flashcards from a block of text, using NLTK
+sentence tokenization and rule-based pattern matching. Cards are stored in
+PostgreSQL with full CRUD.
+
 
 ---
 
@@ -15,60 +17,89 @@ Built with Flask, SQLAlchemy and PostgreSQL
 | **SQLAlchemy** | ORM for database operations                |
 | **PostgreSQL** | Persistent data storage                    |
 | **Docker**     | Containerized database setup               |
-| **NLTK**       | Robust sentence tokenization               |
+| **NLTK**       | Sentence tokenization                      |
 | **pytest**     | Automated API testing                      |
 
 ---
 
 ## Prerequisites
 
-- Python 3.8+
+- Python 3.10 or newer (developed on 3.14)
 - Git
 - Docker Desktop (running)
 - IntelliJ IDEA (or your preferred IDE)
 
 ## Quick Start
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/LuckyMangoz/flashcard-api.git
-   cd flashcard-api
+**1. Clone the repository**
 
-2. **Set up environment variables**
-   ```bash 
-   cp .env.example .env
-   ```
-   Edit .env with your settings (defaults work with Docker):
-   ``` bash
-   DATABASE_URL=postgresql://postgres:password@localhost:5432/flashcard_db
-   DB_USER=postgres
-   DB_PASSWORD=password
-   DB_HOST=localhost
-   DB_PORT=5432
-   DB_NAME=flashcard_db
-   FLASK_ENV=development
-   FLASK_DEBUG=True
-   SECRET_KEY=change-this-in-production
-   MAX_CARDS_PER_REQUEST=10
-   DEFAULT_CARDS_COUNT=5
+```bash
+git clone https://github.com/LuckyMangoz/flashcardapi_Project.git
+cd flashcardapi_Project
+```
 
-3. **Start PostgreSQL**
-   ```bash 
-   docker-compose up-d
-   # Verify if its running
-   docker ps
 
-4. **Install dependencies**
-   ```bash 
-   pip install -r requirements.txt
+**2. Create a virtual environment**
 
-5. **Create the database tables**
-   ```bash 
-   python setup_db.py
+```bash
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
 
-6. **Run the server**
-   ```bash 
-   python -m app.main
+On macOS or Linux, use `source .venv/bin/activate` instead.
+
+**3. Set up environment variables**
+
+```bash
+cp .env.example .env
+```
+
+The values match `docker-compose.yml`, so it works as-is for local development.
+You only need to edit `.env` if you change the database credentials in
+`docker-compose.yml`.
+
+```bash
+DB_USER=LuckyMango
+DB_PASSWORD=password
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=flashcard_project
+
+DEBUG=True
+MAX_CARDS=20
+DEFAULT_CARDS_COUNT=5
+```
+
+You can also set `DATABASE_URL` as a single connection string. If you do, it
+overrides every `DB_*` value above.
+
+**4. Start PostgreSQL**
+
+```bash
+docker compose up -d
+docker ps
+```
+
+Wait a few seconds after starting before connecting — Postgres takes a moment
+to accept connections.
+
+**5. Install dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+**6. Create the database tables**
+
+```bash
+python setup_db.py
+```
+
+**7. Run the server**
+
+```bash
+python -m app.main
+```
 
 The API will be available at http://localhost:5000
 
@@ -76,14 +107,34 @@ The API will be available at http://localhost:5000
 
 ## API Endpoints
 
-| Method | Endpoint          | Description                     |
-|--------|-------------------|---------------------------------|
-| GET    | `/`               | API information & health check  |
-| POST   | `/cards/generate` | Generate flashcards from text   |
+| Method | Endpoint          | Description       |
+|--------|-------------------|-------------------|
+| GET    | `/`               | API information   |
+| POST   | `/cards/generate` | Generate flashcards from text |
 | GET    | `/cards`          | List all flashcards (paginated) |
-| GET    | `/cards/<id>`     | Get a single flashcard          |
-| PUT    | `/cards/<id>`     | Update a flashcard              |
-| DELETE | `/cards/<id>`     | Delete a flashcard              |
+| GET    | `/cards/<id>`     | Get a single flashcard |
+| PUT    | `/cards/<id>`     | Update a flashcard |
+| DELETE | `/cards/<id>`     | Delete a flashcard |
+
+### `POST /cards/generate`
+ 
+| Field       | Type    | Required | Default | Notes                          |
+|-------------|---------|----------|---------|--------------------------------|
+| `text`      | string  | yes      | —       | Cannot be empty or whitespace  |
+| `num_cards` | integer | no       | `5`     | Capped at `MAX_CARDS` (20)     |
+| `category`  | string  | no       | general | Stored and returned as `topic` |
+ 
+### `GET /cards`
+ 
+| Query param | Type    | Default | Notes          |
+|-------------|---------|---------|----------------|
+| `page`      | integer | `1`     |                |
+| `per_page`  | integer | `10`    | Capped at `50` |
+ 
+### `PUT /cards/<id>`
+ 
+Accepts any of `prompt`, `response`, `topic`, `level`. Fields you omit are left
+unchanged.
 
 ---
 
@@ -92,43 +143,67 @@ The API will be available at http://localhost:5000
 ```bash
 curl -X POST http://localhost:5000/cards/generate \
   -H "Content-Type: application/json" \
-  -d '{"text": "Python is a programming language created by Guido van Rossum in 1991.", "num_cards": 3}'
+  -d '{"text": "Linus Torvalds developed the Linux kernel.", "num_cards": 1}'
 ```
 
-## Example response
+## Example Response
 
-```bash
+```json
 {
-  "message": "Successfully created 3 card(s).",
+  "message": "Successfully generated flashcards",
   "cards": [
     {
       "id": 1,
-      "prompt": "What is a programming language?",
-      "response": "Python",
-      "type": "definition",
-      "level": 1,
-      "topic": "general"
+      "prompt": "Who developed the Linux kernel?",
+      "response": "Linus Torvalds",
+      "source": "Linus Torvalds developed the Linux kernel.",
+      "topic": "general",
+      "level": 2,
+      "type": "person",
+      "creation_date": "2026-09-11T21:15:04.221847",
+      "updated_date": null
     }
   ]
 }
 ```
 
-## Running tests
+Note that `type` appears in this response but is not stored. Fetching the same
+card with `GET /cards/<id>` will not include it.
 
-```bash 
+---
+
+## Running Tests
+
+With the virtual environment active and PostgreSQL running:
+
+```bash
 pytest tests/test_api.py -v
-or
+```
+
+If `pytest` isn't found, the virtual environment isn't active:
+
+```bash
 .\.venv\Scripts\python -m pytest tests/test_api.py -v
 ```
 
-# Expected Output
+### Expected output
 
 ```text
 tests/test_api.py::test_home_route PASSED
-tests/test_api.py::test_generate_no_text PASSED
-tests/test_api.py::test_generate_empty_text PASSED
-tests/test_api.py::test_generate_success PASSED
+tests/test_api.py::test_generate_flashcards_no_text PASSED
+tests/test_api.py::test_generate_flashcards_empty_text PASSED
+tests/test_api.py::test_generate_flashcards_success PASSED
+tests/test_api.py::test_list_all_flashcards PASSED
+tests/test_api.py::test_get_single_flashcard PASSED
+tests/test_api.py::test_get_nonexistent_flashcard PASSED
+tests/test_api.py::test_update_flashcard PASSED
+tests/test_api.py::test_delete_flashcard PASSED
+
+9 passed
 ```
+
+---
+
 
 ## Project Structure
 
@@ -153,16 +228,37 @@ flashcard-api/
 └── README.md
 ```
 
-## Future Plans (V1.1+)
+---
 
-Add deck support to organise flashcards
+## Known Limitations
 
-Implement user authentication
+- **Card quality varies with sentence structure.** Definitions get inverted into
+  questions that can be hard to answer without the source text. Date questions
+  are assembled from fragments and are sometimes ungrammatical.
+- **Names with surnames are not detected.** Person matching requires two
+  consecutive capitalised words, so "Guido van Rossum" produces no person card.
+- **No authentication.** Anyone who can reach the port can read, update or
+  delete any card.
+- **`type` is returned but not persisted.** It appears on generation and is
+  absent on every subsequent fetch.
+- **Schema changes use `create_all()`**, which creates missing tables but never
+  alters existing ones.
+- **Tests run against the development database** and leave rows behind.
+---
 
-Integrate AI for the question generation
+## Roadmap
 
-Build a frontend client
+- Replace the rule-based generator with an LLM-backed one, keeping the rule
+  engine as a backup
+- Persist the card type
+- Separate test database
+- Deck support to organise cards
+- A web frontend for creating and studying cards, with the API deployed so it
+  can be used from a browser
+- User authentication
 
-# License
+---
+
+## License
 
 MIT
