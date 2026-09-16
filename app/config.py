@@ -17,6 +17,10 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 MAX_CARDS = int(os.getenv("MAX_CARDS", "20"))
 DEFAULT_CARDS_COUNT = int(os.getenv("DEFAULT_CARDS_COUNT", "5"))
 
+CARD_GENERATOR = os.getenv("CARD_GENERATOR", "rules")
+LLM_API_KEY = os.getenv("LLM_API_KEY", "")
+LLM_MODEL = os.getenv("LLM_MODEL", "")
+
 
 def get_database_url():
     """Returns the PostgreSQL connection string"""

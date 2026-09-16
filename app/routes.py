@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app.database import get_gb
 from app.models import StudyCard
-from app.flashcard_generator import generate_cards
+from app.generators import generate_cards
 from app.config import MAX_CARDS, DEFAULT_CARDS_COUNT
 from nltk import data
 

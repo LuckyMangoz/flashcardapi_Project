@@ -1,0 +1,21 @@
+﻿kind,source,question,answer
+definition,Encapsulation is a principle that hides an object's internal data and exposes only the methods that need to be public.,What is a principle that hides an object's internal data and exposes only the methods that need to be public?,Encapsulation
+definition,A hash map is a data structure that stores key and value pairs.,What is a data structure that stores key and value pairs?,hash map
+definition,A primary key is a column that uniquely identifies each row in a table.,What is a column that uniquely identifies each row in a table?,primary key
+definition,Docker is a tool that packages an application with everything it needs to run.,What is a tool that packages an application with everything it needs to run?,Docker
+person,Linus Torvalds created Git in 2005.,Who created Git in 2005?,Linus Torvalds
+person,John Ternus became the CEO of Apple in 2026.,When did John Ternus became the CEO of Apple?,2026
+person,Jensen Huang co-founded Nvidia in 1993.,When did Jensen Huang co-founded Nvidia?,1993
+location,"Nvidia's headquarters is located in Santa Clara, California.",Where is Nvidia's headquarters?,"Santa Clara, California"
+location,"Microsoft's main campus is in Redmond, Washington.",Where is Microsoft's main campus?,"Redmond, Washington"
+location,"Apple is headquartered in Cupertino, California.","Fill in the blank: _______ is headquartered in Cupertino, California.",Apple
+date,GitHub was founded in 2008.,When did GitHub was founded?,2008
+date,Docker was first released in 2013.,When did Docker was first released?,2013
+multi,"INNER JOIN returns only the rows that match, while LEFT JOIN keeps every row from the left table.","Fill in the blank: _______ JOIN returns only the rows that match, while LEFT JOIN keeps every row from the left table.",INNER
+multi,"Git stores snapshots instead of differences, and every commit points to the commit before it.","Fill in the blank: Git stores snapshots instead of differences, and _______ commit points to the commit before it.",every
+process,"When you run git commit, the files in the staging area are saved as a new snapshot and the branch pointer moves forward.","Fill in the blank: When you run git commit, the files in the _______ area are saved as a new snapshot and the branch pointer moves forward.",staging
+process,"Binary search checks the middle item, throws away the half that cannot contain the target, and repeats until it finds the item.","Fill in the blank: Binary search checks the _______ item, throws away the half that cannot contain the target, and repeats until it finds the item.",middle
+process,"Breadth first search uses a queue to process nodes layer by layer, visiting all immediate neighbors before moving deeper into the graph.","Fill in the blank: Breadth first search uses a _______ to process nodes layer by layer, visiting all immediate neighbors before moving deeper into the graph.",queue
+prose,"Indexes make reads faster and writes slower, because every insert has to update every index on the table.","Fill in the blank: Indexes make reads faster and writes slower, because every insert has to update every _______ on the table.",index
+edge,Polymorphism.,Fill in the blank: _______.,Polymorphism
+edge,University Of Washington,Fill in the blank: _______ Of Washington,University
