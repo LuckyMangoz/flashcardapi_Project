@@ -1,0 +1,41 @@
+﻿kind,source,question,answer
+definition,Encapsulation is a principle that hides an object's internal data and exposes only the methods that need to be public.,What is encapsulation?,A principle that hides an object's internal data and exposes only the methods that need to be public.
+definition,Encapsulation is a principle that hides an object's internal data and exposes only the methods that need to be public.,"In encapsulation, what is exposed regarding an object?",Only the methods that need to be public.
+definition,A hash map is a data structure that stores key and value pairs.,What is a hash map?,A data structure that stores key and value pairs.
+definition,A hash map is a data structure that stores key and value pairs.,What does a hash map store?,Key and value pairs.
+definition,A primary key is a column that uniquely identifies each row in a table.,What is a primary key?,A column that uniquely identifies each row in a table
+definition,A primary key is a column that uniquely identifies each row in a table.,What part of a table does a primary key uniquely identify?,Each row
+definition,Docker is a tool that packages an application with everything it needs to run.,What is Docker?,A tool that packages an application with everything it needs to run.
+definition,Docker is a tool that packages an application with everything it needs to run.,What does Docker package an application with?,Everything it needs to run.
+person,Linus Torvalds created Git in 2005.,Who created Git?,Linus Torvalds
+person,Linus Torvalds created Git in 2005.,In what year was Git created?,2005
+person,John Ternus became the CEO of Apple in 2026.,Who became the CEO of Apple in 2026?,John Ternus
+person,John Ternus became the CEO of Apple in 2026.,What company did John Ternus become the CEO of in 2026?,Apple
+person,Jensen Huang co-founded Nvidia in 1993.,Who co-founded Nvidia in 1993?,Jensen Huang
+person,Jensen Huang co-founded Nvidia in 1993.,In what year was Nvidia co-founded by Jensen Huang?,1993
+location,"Nvidia's headquarters is located in Santa Clara, California.","What company is headquartered in Santa Clara, California?",Nvidia
+location,"Nvidia's headquarters is located in Santa Clara, California.",Where is Nvidia's headquarters located?,"Santa Clara, California"
+location,"Microsoft's main campus is in Redmond, Washington.","What company has its main campus in Redmond, Washington?",Microsoft
+location,"Microsoft's main campus is in Redmond, Washington.",Where is Microsoft's main campus located?,"Redmond, Washington"
+location,"Apple is headquartered in Cupertino, California.","What company is headquartered in Cupertino, California?",Apple
+location,"Apple is headquartered in Cupertino, California.",Where is Apple headquartered?,"Cupertino, California"
+date,GitHub was founded in 2008.,What is GitHub?,A platform that was founded in 2008.
+date,GitHub was founded in 2008.,In what year was GitHub founded?,2008
+date,Docker was first released in 2013.,What software technology was first released in 2013?,Docker
+date,Docker was first released in 2013.,In what year was Docker first released?,2013
+multi,"INNER JOIN returns only the rows that match, while LEFT JOIN keeps every row from the left table.",Which SQL join operation returns only the rows that match?,INNER JOIN
+multi,"INNER JOIN returns only the rows that match, while LEFT JOIN keeps every row from the left table.",Which SQL join operation keeps every row from the left table?,LEFT JOIN
+multi,"Git stores snapshots instead of differences, and every commit points to the commit before it.",What does Git store instead of differences?,Snapshots
+multi,"Git stores snapshots instead of differences, and every commit points to the commit before it.","In Git, what does every commit point to?",The commit before it
+process,"When you run git commit, the files in the staging area are saved as a new snapshot and the branch pointer moves forward.",What happens to the files in the staging area when you run git commit?,They are saved as a new snapshot.
+process,"When you run git commit, the files in the staging area are saved as a new snapshot and the branch pointer moves forward.",What happens to the branch pointer when you run git commit?,It moves forward.
+process,"Binary search checks the middle item, throws away the half that cannot contain the target, and repeats until it finds the item.",What does binary search check first?,The middle item
+process,"Binary search checks the middle item, throws away the half that cannot contain the target, and repeats until it finds the item.",What does binary search do with the half of the data that cannot contain the target?,It throws it away
+process,"Breadth first search uses a queue to process nodes layer by layer, visiting all immediate neighbors before moving deeper into the graph.",What data structure does breadth-first search use to process nodes?,A queue
+process,"Breadth first search uses a queue to process nodes layer by layer, visiting all immediate neighbors before moving deeper into the graph.",In what manner does breadth-first search process nodes in a graph?,Layer by layer
+prose,"Indexes make reads faster and writes slower, because every insert has to update every index on the table.",What effect do database indexes have on read operations?,They make reads faster.
+prose,"Indexes make reads faster and writes slower, because every insert has to update every index on the table.",What effect do database indexes have on write operations?,They make writes slower.
+edge,Polymorphism.,What is polymorphism?,Polymorphism is a core concept in object-oriented programming that allows different classes to be treated through the same interface.
+edge,Polymorphism.,How does polymorphism affect methods in different classes?,It allows different classes to have methods with the same name but different implementations.
+edge,University Of Washington,What is the University of Washington?,A university
+edge,University Of Washington,Where is the University of Washington located?,Washington
