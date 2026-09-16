@@ -1,4 +1,4 @@
-"""Card generation using the Gemini API."""
+"""Card generation using Gemini API."""
 import os
 from dotenv import load_dotenv
 from google import genai
@@ -52,7 +52,6 @@ CARD_SCHEMA = {
 
 def _call_api(text, num):
     """The only function that talks to Google. Swapped for a fake in tests."""
-    from google import genai
 
     client = genai.Client(api_key=config.LLM_API_KEY)
 
