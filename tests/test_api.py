@@ -84,7 +84,6 @@ def test_get_single_flashcard(client):
     assert data['id'] == card_id
     assert 'prompt' in data
     assert 'response' in data
-    # assert 'type' in data
 
 
 def test_get_nonexistent_flashcard(client):

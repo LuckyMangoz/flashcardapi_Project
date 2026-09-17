@@ -46,9 +46,9 @@ def create_cards():
             'cards': []
         }), 200
 
-    saved = []
     with get_gb() as db:
         try:
+            new_cards = []
             for card_data in generated:
                 new_card = StudyCard(
                     prompt=card_data['question'],
@@ -58,12 +58,15 @@ def create_cards():
                     level=card_data.get('difficulty', 1)
                 )
                 db.add(new_card)
-                db.commit()
-                db.refresh(new_card)
+                new_cards.append(new_card)
 
-                card_dict = new_card.to_dict()
-                card_dict['type'] = card_data.get('type', 'unknown')
-                saved.append(card_dict)
+            db.flush()
+
+            saved = []
+            for new_card in new_cards:
+                saved.append(new_card.to_dict())
+
+            db.commit()
 
             return jsonify({
                 'message': 'Successfully generated flashcards',
@@ -72,7 +75,7 @@ def create_cards():
 
         except Exception as e:
             db.rollback()
-            return jsonify({'error': f'Database error: {str(e)}'}), 500
+            return jsonify({'error': 'Internal server error'}), 500
 
 
 @cards_bp.route('/cards', methods=['GET'])
