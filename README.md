@@ -6,7 +6,7 @@ A REST API that generates study flashcards from a block of text. Cards are
 stored in PostgreSQL with full CRUD.
 
 
-https://github.com/user-attachments/assets/b19fc524-5687-4a62-9d22-f2eb3f11d19b
+https://github.com/user-attachments/assets/b7788468-b83f-4d12-b0f5-da7a454e50e3
 
 
 ---
