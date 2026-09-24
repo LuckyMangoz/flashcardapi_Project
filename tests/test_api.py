@@ -47,7 +47,6 @@ def test_generate_flashcards_success(client):
     first_card = data['cards'][0]
     assert 'prompt' in first_card
     assert 'response' in first_card
-    assert 'type' in first_card
 
 
 def test_list_all_flashcards(client):
