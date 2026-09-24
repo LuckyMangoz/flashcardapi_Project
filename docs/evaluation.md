@@ -14,7 +14,7 @@ No partial credit. A text producing no cards counts as a failure.
 ## Method
 
 Both generators run over the same 20 texts. To remove biases the results
-are shuffled together and graded without knowing which generator made which card.
+are shuffled together into one file labeled A and B, then graded.
 
 ## Results (2026-09-13)
 
